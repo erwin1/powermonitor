@@ -47,7 +47,7 @@ public class PowerPeakService {
             //Alert of new peak:
             if (this.currentPeakTimestamp != null) {
                 if (!this.currentPeakTimestamp.equals(telegram.getMontlyPowerPeakTimestampAsDate())) {
-                    //                notificationService.sendNotification("!!! New Peak: "+currentMonthPeak.getValue()+"W\n"+currentMonthPeak.getTimestamp());
+                    slackService.sendNotification("!!! New Peak: "+telegram.getMontly_power_peak_w()+"W\n"+telegram.getMontlyPowerPeakTimestampAsDate());
                 }
             }
             this.currentPeakTimestamp = telegram.getMontlyPowerPeakTimestampAsDate();
@@ -79,12 +79,12 @@ public class PowerPeakService {
                             telegram.getMontlyPowerPeakTimestampAsDate(),
                             estimatedPeakW);
                     LOGGER.log(Level.SEVERE, message);
-                    //notificationService.sendNotification(message);
+                    slackService.sendNotification(message);
                 }
             }
         }catch (Exception e) {
             LOGGER.log(Level.SEVERE, "error estimating new peak ", e);
-            //notificationService.sendNotification(message);
+            slackService.sendNotification("error estimating new peak "+e);
         }
     }
 
