@@ -9,31 +9,40 @@ var newAverageEstimateGauge;
 
 
 function refreshData() {
-        $.get( "/metrics/live", function( d ) {
+    $.ajax({
+        url: "/metrics/live",
+        type: "GET",
+        success: function(d) {
+            monthPeakGauge.refresh(d.monthlyPowerPeakW);
+            currentAverageGauge.refresh(d.importAverageW);
+            newAverageEstimateGauge.refresh(d.peakEstimateW);
+            if (d.importW > 0) {
+                 gridGauge.refresh(d.importW);
+            } else {
+                gridGauge.refresh(-d.exportW);
+            }
 
-        monthPeakGauge.refresh(d.monthlyPowerPeakW);
-        currentAverageGauge.refresh(d.importAverageW);
-        newAverageEstimateGauge.refresh(d.peakEstimateW);
-        if (d.importW > 0) {
-             gridGauge.refresh(d.importW);
-        } else {
-            gridGauge.refresh(-d.exportW);
-        }
+            {
+            let tsString = d.timestamp;
+            let tIndex = tsString.indexOf("T");
+            let plusIndex = tsString.indexOf("+");
+            let dts = $.datepicker.parseDate( "yy-mm-dd", tsString.substring(0, tIndex) );
+            $("#livedatatimestamp").html($.datepicker.formatDate("dd/mm/yy", dts) + " " + tsString.substring(tIndex + 1, plusIndex));
+            }
 
-        {
-        let tsString = d.timestamp;
-        let tIndex = tsString.indexOf("T");
-        let plusIndex = tsString.indexOf("+");
-        let dts = $.datepicker.parseDate( "yy-mm-dd", tsString.substring(0, tIndex) );
-        $("#livedatatimestamp").html($.datepicker.formatDate("dd/mm/yy", dts) + " " + tsString.substring(tIndex + 1, plusIndex));
-        }
-
-        {
-        let tsString = d.monthlyPowerPeakTimestamp;
-        let tIndex = tsString.indexOf("T");
-        let dotIndex = tsString.indexOf("+");
-        let dts = $.datepicker.parseDate( "yy-mm-dd", tsString.substring(0, tIndex) );
-        $("#monthPeakDate").html($.datepicker.formatDate("dd/mm/yy", dts) + " " + tsString.substring(tIndex + 1, dotIndex));
+            {
+            let tsString = d.monthlyPowerPeakTimestamp;
+            let tIndex = tsString.indexOf("T");
+            let dotIndex = tsString.indexOf("+");
+            let dts = $.datepicker.parseDate( "yy-mm-dd", tsString.substring(0, tIndex) );
+            $("#monthPeakDate").html($.datepicker.formatDate("dd/mm/yy", dts) + " " + tsString.substring(tIndex + 1, dotIndex));
+            }
+        },
+        error: function() {
+            $("#livedatatimestamp").html("Error loading data <span style='color:red;'>&#10060;</span>");
+            gridGauge.refresh(0);
+            currentAverageGauge.refresh(0);
+            newAverageEstimateGauge.refresh(0);
         }
     });
 }
