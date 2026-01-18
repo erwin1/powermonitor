@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homecontrol - metrics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<div class="header">
+    <div class="header-content">
+        <h3>Power monitor</h3>
+        <div id="livedatatimestamp">- loading -</div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="card">
+        <h3 class="card-title">Current grid meter</h3>
+        <div class="gauge-container">
+            <div id="gridGauge" class="gauge"></div>
+        </div>
+    </div>
+
+    <div class="card card-medium">
+        <h3 class="card-title">Monthly peak</h3>
+        <div class="gauge-container">
+            <div id="monthPeakGauge" class="gauge"></div>
+            <div id="monthPeakDate"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 class="card-title">Current 15m average</h3>
+        <div class="gauge-container">
+            <div id="currentAverageGauge" class="gauge"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 class="card-title">Estimate 15m peak</h3>
+        <div class="gauge-container">
+            <div id="newAverageEstimateGauge" class="gauge"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js'></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.umd.js" integrity="sha512-CMF3tQtjOoOJoOKlsS7/2loJlkyctwzSoDK/S40iAB+MqWSaf50uObGQSk5Ny/gfRhRCjNLvoxuCvdnERU4WGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="raphael.min.js"></script>
+<script src="justgage.js"></script>
+<script src="script.js"></script>
+
+
+</body>
+</html>
