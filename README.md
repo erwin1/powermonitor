@@ -35,7 +35,7 @@ The `config.properties` file contains the following settings:
 Example:
 ```properties
 homewizard.host=192.168.1.10
-slack.url=https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+slack.url=https://hooks.slack.com/services/XXX/XXX/XXX
 slack.channel=#power-alerts
 port=8080
 ```
