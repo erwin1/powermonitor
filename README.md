@@ -36,6 +36,6 @@ Example:
 ```properties
 homewizard.host=192.168.1.10
 slack.url=https://hooks.slack.com/services/XXX/XXX/XXX
-slack.channel=#power-alerts
+slack.channel=power-alerts
 port=8080
 ```
